@@ -1,12 +1,13 @@
-node {
-
-    checkout scm
-
-    docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
-
-        def customImage = docker.build("mrig11/next-nap")
-
-        /* Push the container to the custom Registry */
-        customImage.push()
+    pipeline {
+        agent any
+        
+        tools {nodejs "node"}
+        stages {
+            stage('Build') {
+                steps {
+                    // git branch: 'main', credentialsId: 'Tanzil', url: 'https://github.com/newageproductsgit/next-nap.git'
+                    git branch: 'main', credentialsId: 'Tanzil', url: 'https://github.com/tanzilansari/next-js-docker.git'
+                }
+            }
+        }
     }
-}
